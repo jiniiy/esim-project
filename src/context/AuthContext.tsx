@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     router.push("/");
   };
 
-  // ✅ 아직 유저 로딩 중이면 아무것도 렌더링하지 않음 (Hydration mismatch 방지)
   if (loading) return null;
 
   return (

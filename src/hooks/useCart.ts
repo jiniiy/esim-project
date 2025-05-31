@@ -6,7 +6,6 @@ const CART_KEY = "cartItems";
 export const useCart = () => {
   const [cart, setCart] = useState<Plan[]>([]);
 
-  //first time, Loading
   useEffect(() => {
     const stored = localStorage.getItem(CART_KEY);
     if (stored) {
@@ -18,14 +17,13 @@ export const useCart = () => {
     }
   }, []);
 
-  //upon on Cart condition, localstorage set
   useEffect(() => {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (plan: Plan) => {
     setCart((prev) => {
-      if (prev.some((item) => item.id === plan.id)) return prev; // depending dupulication
+      if (prev.some((item) => item.id === plan.id)) return prev;
       return [...prev, plan];
     });
   };

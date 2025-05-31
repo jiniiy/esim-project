@@ -1,7 +1,6 @@
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 
-// 중복 초기화 방지
 if (!getApps().length) {
   initializeApp({
     credential: cert({
