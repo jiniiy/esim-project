@@ -19,7 +19,6 @@ export default function CheckoutPage() {
 
   const handleSimulatePayment = () => {
     router.push("/thank-you");
-    clearCart();
   };
 
   return (
