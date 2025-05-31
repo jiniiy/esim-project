@@ -6,6 +6,7 @@ import {
 } from "@mantine/core";
 import theme from "./theme";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Next App Mantine Tailwind Template",
@@ -23,7 +24,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className="antialiased">
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}>
+          <AuthProvider>{children}</AuthProvider>
+        </MantineProvider>
       </body>
     </html>
   );
