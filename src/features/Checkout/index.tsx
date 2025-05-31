@@ -15,12 +15,11 @@ import { useCart } from "@/hooks/useCart";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, clearCart, totalPrice } = useCart();
+  const { cart, totalPrice, clearCart } = useCart();
 
   const handleSimulatePayment = () => {
-    if (cart.length === 0) return;
-    clearCart();
     router.push("/thank-you");
+    clearCart();
   };
 
   return (
@@ -32,7 +31,7 @@ export default function CheckoutPage() {
       <Divider mb="md" />
 
       <Stack>
-        {cart.map((item) => (
+        {cart?.map((item) => (
           <Group key={item.id} justify="space-between">
             <Text>
               {item.name}
@@ -47,7 +46,7 @@ export default function CheckoutPage() {
         <Text fw={700}>Total: ${totalPrice.toFixed(2)}</Text>
         <Group gap={16}>
           <Button onClick={() => router.back()}>Back</Button>
-          <Button onClick={handleSimulatePayment} disabled={cart.length === 0}>
+          <Button onClick={handleSimulatePayment} disabled={!cart?.length}>
             Simulate Payment
           </Button>
         </Group>

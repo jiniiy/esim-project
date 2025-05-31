@@ -25,14 +25,14 @@ export default function PlansForCountryPage({ plans }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
 
   const handleGoToCart = () => {
-    if (cart.length === 0) {
-      open();
-    } else {
+    if (cart && cart.length > 0) {
       router.push("/cart");
+    } else {
+      open();
     }
   };
 
-  const isSelected = (plan: Plan) => cart.some((item) => item.id === plan.id);
+  const isSelected = (plan: Plan) => cart?.some((item) => item.id === plan.id);
 
   return (
     <Container>

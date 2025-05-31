@@ -12,7 +12,7 @@ export default function CartPage() {
   return (
     <Container>
       <Stack>
-        {cart.length > 0 ? (
+        {cart && cart.length > 0 ? (
           cart.map((item) => (
             <Card key={item.id} shadow="sm" padding="lg" radius="md" withBorder>
               <Group justify="space-between">
@@ -44,7 +44,7 @@ export default function CartPage() {
         <Group gap={16}>
           <Button onClick={() => router.back()}>Back</Button>
           <Button
-            disabled={cart.length === 0}
+            disabled={!cart?.length}
             onClick={() => router.push("/checkout")}
           >
             Proceed to Checkout
