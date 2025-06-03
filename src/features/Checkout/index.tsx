@@ -15,7 +15,7 @@ import { useCart } from "@/hooks/useCart";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, totalPrice, clearCart } = useCart();
+  const { cart, totalPrice } = useCart();
 
   const handleSimulatePayment = () => {
     router.push("/thank-you");
