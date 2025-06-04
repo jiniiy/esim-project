@@ -8,9 +8,13 @@ import { useRouter } from "next/navigation";
 export default function LoginButton() {
   const { user } = useAuth();
   const router = useRouter();
-
+  // const [loading, isLoading]
   const handleLogout = async () => {
     await logout();
+    router.push("/");
+  };
+  const handleLogin = async () => {
+    await login();
     router.push("/");
   };
 
@@ -24,7 +28,7 @@ export default function LoginButton() {
           </Button>
         </>
       ) : (
-        <Button onClick={login} variant="filled" color="blue">
+        <Button onClick={handleLogin} variant="filled" color="blue">
           Login
         </Button>
       )}
