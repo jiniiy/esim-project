@@ -4,15 +4,17 @@ import type { NextRequest } from "next/server";
 const protectedRoutes = ["/country", "/cart", "/checkout", "/thank-you"];
 
 export function middleware(request: NextRequest) {
-  const isProtected = protectedRoutes.some((route) =>
-    request.nextUrl.pathname.startsWith(route)
+  const pathname = request.nextUrl.pathname;
+
+  const isProtected = protectedRoutes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
   );
 
   const token = request.cookies.get("firebaseToken")?.value;
 
   if (isProtected && !token) {
     const loginUrl = new URL("/", request.url);
-    loginUrl.searchParams.set("redirect", request.nextUrl.pathname);
+    loginUrl.searchParams.set("redirect", encodeURIComponent(pathname));
     return NextResponse.redirect(loginUrl);
   }
 
@@ -20,10 +22,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/country/:path*",
-    "/cart/:path*",
-    "/checkout/:path*",
-    "/thank-you/:path*",
-  ],
+  matcher: protectedRoutes.map((route) => `${route}/:path*`),
 };
